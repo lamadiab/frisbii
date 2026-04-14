@@ -1,0 +1,23 @@
+<table class="customer-table">
+  <thead>
+    <tr>
+      <th>Handle</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="loading">
+      <td colspan="5" class="loading">Loading customers...</td>
+    </tr>
+    <tr *ngFor="let customer of customers">
+      <td><code>{{ customer.handle }}</code></td>
+      <td>{{ customer.fullName }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.company }}</td>
+      <td>{{ customer.created | date:'mediumDate' }}</td>
+    </tr>
+  </tbody>
+</table>
