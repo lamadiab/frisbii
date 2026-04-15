@@ -1,8 +1,8 @@
 export interface CustomerDTO {
   handle: string;
   email: string;
-  firstName?: string;
-  lastName?: string;
-  company?: string;
+  first_name: string;
+  last_name: string;
+  company: string;
   created: string;
 }

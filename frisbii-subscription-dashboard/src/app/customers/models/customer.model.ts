@@ -42,14 +42,14 @@ export class Customer {
     return Customer.of({
       handle: dto.handle,
       email: dto.email,
-      firstName: dto.firstName ?? '',
-      lastName: dto.lastName ?? '',
-      company: dto.company ?? '',
+      firstName: dto.first_name,
+      lastName: dto.last_name,
+      company: dto.company,
       created: new Date(dto.created),
     });
   }
 
   get fullName(): string {
-    return `${this.firstName} ${this.lastName}`.trim() || this.email;
+    return `${this.firstName} ${this.lastName}`.trim();
   }
 }
