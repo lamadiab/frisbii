@@ -1,14 +1,14 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CustomerService } from '../core/services/customer.service';
-import { Customer } from '../customers/models/customer.model';
+import { CustomerService } from '../../core/services/customer.service';
+import { Customer } from '../../customers/models/customer.model';
 import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.page.html',
+  styleUrls: ['./dashboard.page.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardPage implements OnInit {
   readonly customers = signal<Customer[]>([]);
   readonly loading = signal<boolean>(true);
   readonly error = signal<string | null>(null);

@@ -41,7 +41,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="customer-row"></tr>
+        <tr mat-row *matRowDef="let customer; columns: displayedColumns;" class="customer-row" [routerLink]="['/customers', customer.handle]"></tr>
       </table>
 
       <mat-paginator

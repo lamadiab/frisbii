@@ -1,2 +1,11 @@
-<h1>Frisbii Subscription Dashboard</h1>
-<app-dashboard></app-dashboard>
+<mat-toolbar color="primary">
+  <button mat-icon-button *ngIf="showBackButton | async" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Dashboard</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

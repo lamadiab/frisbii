@@ -11,18 +11,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { CustomerListComponent } from './customers/customer-list/customer-list.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardPage } from './pages/dashboard/dashboard.page';
+import { CustomerDetailComponent } from './customers/customer-detail/customer-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerListComponent,
-    DashboardComponent
+    DashboardPage,
+    CustomerDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatInputModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     {
