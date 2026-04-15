@@ -24,4 +24,9 @@ export class CustomerService extends ListService<CustomerDTO> {
         map(response => response.content.map(dto => Customer.fromDTO(dto)))
       );
   }
+
+  getByHandle(handle: string): Observable<Customer> {
+    return this.http.get<CustomerDTO>(`${this.baseUrl}/customer/${handle}`)
+      .pipe(map(dto => Customer.fromDTO(dto)));
+  }
 }

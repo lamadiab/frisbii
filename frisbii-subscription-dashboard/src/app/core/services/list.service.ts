@@ -15,7 +15,7 @@ export interface ListResponse<T> {
 
 @Injectable()
 export abstract class ListService<T> {
-  private readonly baseUrl = `${environment.apiBaseUrl}/list`;
+  protected readonly baseUrl = `${environment.apiBaseUrl}`;
 
   constructor(
     protected http: HttpClient,
@@ -23,6 +23,6 @@ export abstract class ListService<T> {
   ) { }
 
   get(params?: HttpParams): Observable<ListResponse<T>> {
-    return this.http.get<ListResponse<T>>(`${this.baseUrl}/${this.resourceName}`, { params });
+    return this.http.get<ListResponse<T>>(`${this.baseUrl}/list/${this.resourceName}`, { params });
   }
 }

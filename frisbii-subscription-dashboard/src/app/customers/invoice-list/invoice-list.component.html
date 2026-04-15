@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Invoices
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="loading-container" *ngIf="isLoading()">
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="48"
+      ></mat-progress-spinner>
+    </div>
+
+    <div class="table-container" *ngIf="!isLoading()">
+      <div class="empty-state" *ngIf="allInvoices().length === 0">
+        <p>No invoices found for this customer</p>
+      </div>
+
+      <table
+        mat-table
+        [dataSource]="allInvoices()"
+        *ngIf="allInvoices().length > 0"
+      >
+        <ng-container matColumnDef="handle">
+          <th mat-header-cell *matHeaderCellDef>Handle</th>
+          <td mat-cell *matCellDef="let invoice">
+            <code>{{ invoice.handle }}</code>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>State</th>
+          <td mat-cell *matCellDef="let invoice">
+            <span class="status-badge status-{{ invoice.state }}">
+              {{ invoice.state }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let invoice">
+            {{ invoice.amount / 100 | currency: invoice.currency }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef>Created</th>
+          <td mat-cell *matCellDef="let invoice">
+            {{ invoice.created | date: "mediumDate" }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['handle', 'state', 'amount', 'created']"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: ['handle', 'state', 'amount', 'created']
+          "
+        ></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

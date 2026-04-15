@@ -1,0 +1,13 @@
+<ng-container *ngIf="customer() as customer">
+  <app-customer-detail [customer]="customer"></app-customer-detail>
+  <app-invoice-list [invoices]="invoices()" [loading]="loading()"></app-invoice-list>
+</ng-container>
+
+<div class="loading-container" *ngIf="loading()">
+  <mat-progress-spinner mode="indeterminate" diameter="64"></mat-progress-spinner>
+</div>
+
+<div class="error-message" *ngIf="error()">
+  <mat-icon>error_outline</mat-icon>
+  <p>{{ error() }}</p>
+</div>

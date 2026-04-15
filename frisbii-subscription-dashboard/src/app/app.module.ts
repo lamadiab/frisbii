@@ -19,14 +19,20 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { CustomerListComponent } from './customers/customer-list/customer-list.component';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
-import { CustomerDetailComponent } from './customers/customer-detail/customer-detail.component';
+import { CustomerDetailComponent } from './pages/customer/components/customer-detail.component';
+import { CustomerPage } from './pages/customer/customer.page';
+import { InvoiceListComponent } from './customers/invoice-list/invoice-list.component';
+import { SubscriptionListComponent } from './customers/subscription-list/subscription-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerListComponent,
     DashboardPage,
-    CustomerDetailComponent
+    CustomerPage,
+    CustomerDetailComponent,
+    InvoiceListComponent,
+    SubscriptionListComponent,
   ],
   imports: [
     BrowserModule,

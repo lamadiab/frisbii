@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ customer.fullName }}</mat-card-title>
+    <mat-card-subtitle>{{ customer.handle }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="customer-grid">
+      <div class="customer-card-item">
+        <span class="label">Email</span>
+        <span class="value">{{ customer.email }}</span>
+      </div>
+      <div class="customer-card-item">
+        <span class="label">Company</span>
+        <span class="value">{{ customer.company }}</span>
+      </div>
+      <div class="customer-card-item">
+        <span class="label">Created</span>
+        <span class="value">{{ customer.created | date:'mediumDate' }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
