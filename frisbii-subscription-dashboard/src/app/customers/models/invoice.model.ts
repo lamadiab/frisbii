@@ -1,3 +1,4 @@
+import { checkPropsNotNull } from "src/app/shared/utils/validation";
 import { InvoiceDTO, InvoiceStateDTO } from "../../core/api/invoice.api";
 
 export enum InvoiceState {
@@ -26,6 +27,23 @@ export class InvoiceStateUtils {
         return InvoiceState.unknown;
     }
   }
+
+  static getLabel(state: InvoiceState): string {
+    switch (state) {
+      case InvoiceState.created:
+        return "Created";
+      case InvoiceState.pending:
+        return "Pending";
+      case InvoiceState.settled:
+        return "Settled";
+      case InvoiceState.authorized:
+        return "Authorized";
+      case InvoiceState.failed:
+        return "Failed";
+      default:
+        return "Unknown";
+    }
+  }
 }
 
 export class Invoice {
@@ -35,15 +53,45 @@ export class Invoice {
   readonly currency: string;
   readonly created: Date;
 
-  private constructor(dto: InvoiceDTO) {
-    this.handle = dto.handle;
-    this.state = InvoiceStateUtils.fromDTO(dto.state);
-    this.amount = dto.amount;
-    this.currency = dto.currency;
-    this.created = new Date(dto.created);
+  private constructor(props: {
+    handle: string;
+    state: InvoiceState;
+    amount: number;
+    currency: string;
+    created: string;
+  }) {
+    checkPropsNotNull(props);
+
+    this.handle = props.handle;
+    this.state = props.state;
+    this.amount = props.amount;
+    this.currency = props.currency;
+    this.created = new Date(props.created);
   }
 
+  static of(props: {
+    handle: string;
+    state: InvoiceState;
+    amount: number;
+    currency: string;
+    created: Date;
+  }): Invoice {
+    return new Invoice({
+      handle: props.handle,
+      state: props.state,
+      amount: props.amount,
+      currency: props.currency,
+      created: props.created.toISOString(),
+    });
+  } 
+
   static fromDTO(dto: InvoiceDTO): Invoice {
-    return new Invoice(dto);
+    return Invoice.of({
+      handle: dto.handle,
+      state: InvoiceStateUtils.fromDTO(dto.state),
+      amount: dto.amount,
+      currency: dto.currency,
+      created: new Date(dto.created),
+    });
   }
 }

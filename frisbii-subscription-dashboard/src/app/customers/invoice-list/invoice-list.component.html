@@ -14,14 +14,14 @@
     </div>
 
     <div class="table-container" *ngIf="!isLoading()">
-      <div class="empty-state" *ngIf="allInvoices().length === 0">
+      <div class="empty-state" *ngIf="dataSource.data.length === 0">
         <p>No invoices found for this customer</p>
       </div>
 
       <table
         mat-table
-        [dataSource]="allInvoices()"
-        *ngIf="allInvoices().length > 0"
+        [dataSource]="dataSource"
+        *ngIf="dataSource.data.length > 0"
       >
         <ng-container matColumnDef="handle">
           <th mat-header-cell *matHeaderCellDef>Handle</th>
@@ -34,7 +34,7 @@
           <th mat-header-cell *matHeaderCellDef>State</th>
           <td mat-cell *matCellDef="let invoice">
             <span class="status-badge status-{{ invoice.state }}">
-              {{ invoice.state }}
+              {{ InvoiceStateUtils.getLabel(invoice.state) }}
             </span>
           </td>
         </ng-container>
@@ -55,16 +55,20 @@
 
         <tr
           mat-header-row
-          *matHeaderRowDef="['handle', 'state', 'amount', 'created']"
+          *matHeaderRowDef="displayedColumns"
         ></tr>
         <tr
           mat-row
-          *matRowDef="
-            let row;
-            columns: ['handle', 'state', 'amount', 'created']
-          "
+          *matRowDef="let row; columns: displayedColumns"
         ></tr>
       </table>
+
+      <mat-paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        showFirstLastButtons
+        *ngIf="dataSource.data.length > 0"
+      ></mat-paginator>
     </div>
   </mat-card-content>
 </mat-card>

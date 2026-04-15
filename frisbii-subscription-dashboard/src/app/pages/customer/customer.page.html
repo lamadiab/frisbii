@@ -1,6 +1,12 @@
 <ng-container *ngIf="customer() as customer">
   <app-customer-detail [customer]="customer"></app-customer-detail>
   <app-invoice-list [invoices]="invoices()" [loading]="loading()"></app-invoice-list>
+  <app-subscription-list
+    [subscriptions]="subscriptions()"
+    [loading]="loading()"
+    (pause)="onPauseSubscription($event)"
+    (unpause)="onUnpauseSubscription($event)"
+  ></app-subscription-list>
 </ng-container>
 
 <div class="loading-container" *ngIf="loading()">
